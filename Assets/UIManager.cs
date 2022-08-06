@@ -7,18 +7,23 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public Text ErrorMessage;
+    public Slider volumeSlider;
     private void Start()
     {
         if (ErrorMessage != null)
         {
             ErrorMessage.gameObject.SetActive(false);
         }
+        if (volumeSlider != null)
+        {
+            SetSlider();
+        }
     }
     public void StartGame()
     {
         if (HighScoreManager.Instance.GetPlayer() != null)
         {
-            SceneManager.LoadScene("main");
+            LoadGame();
         }
         else
         {
@@ -41,5 +46,30 @@ public class UIManager : MonoBehaviour
     public void EnterName(string s)
     {
         HighScoreManager.Instance.SetPlayer(s);
+    }
+
+    public void MainMenu()
+    {
+        PlayerPrefs.Save();
+        SceneManager.LoadScene("highScore");
+    }
+
+    public void LoadGame()
+    {
+        PlayerPrefs.Save();
+        SceneManager.LoadScene("main");
+    }
+    public void SetVolume(float f)
+    {
+        PlayerPrefs.SetFloat(HighScoreManager.Instance.GetPlayer()+"Volume", f);
+    }
+
+    public void LoadSettings()
+    {
+        SceneManager.LoadScene("settings");
+    }
+    private void SetSlider()
+    {
+        volumeSlider.value = PlayerPrefs.GetFloat(HighScoreManager.Instance.GetPlayer() + "Volume");
     }
 }

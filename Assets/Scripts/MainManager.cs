@@ -19,7 +19,12 @@ public class MainManager : MonoBehaviour
     
     private bool m_GameOver = false;
 
+    private AudioSource myAudio;
 
+    private void Awake()
+    {
+        myAudio = GetComponent<AudioSource>();
+    }
     void Start()
     {
         const float step = 0.6f;
@@ -38,6 +43,8 @@ public class MainManager : MonoBehaviour
         }
         m_Points = 0;
         UpdateBestScore();
+        myAudio.volume = PlayerPrefs.GetFloat(HighScoreManager.Instance.GetPlayer() + "Volume");
+        myAudio.Play();
     }
 
     private void Update()

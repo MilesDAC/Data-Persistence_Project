@@ -19,7 +19,7 @@ public class HighScoreManager : MonoBehaviour
         {
             Destroy(Instance);
         }
-        currentPlayer = null;    
+        currentPlayer = null;
     }
 
     public void UpdateHighscore(int highscore)
@@ -39,6 +39,7 @@ public class HighScoreManager : MonoBehaviour
         if (!PlayerPrefs.HasKey(player))
         {
             PlayerPrefs.SetInt(player, 0);
+            PlayerPrefs.SetFloat(player + "Volume", 1.0f);
             PlayerPrefs.Save();
         }
     }
